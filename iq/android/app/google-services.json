@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "194412668551",
+    "project_id": "inquisitive-questions",
+    "storage_bucket": "inquisitive-questions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194412668551:android:526ca2cc3ed4a34448ba22",
+        "android_client_info": {
+          "package_name": "com.iq.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194412668551-3qmdvn8qc6483jkhdbfjkd2pkl05emde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUsN55lnI1oauUm1wv3SdhbDri233fIqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194412668551-3qmdvn8qc6483jkhdbfjkd2pkl05emde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194412668551:android:7f4ffcf2d10b62f848ba22",
+        "android_client_info": {
+          "package_name": "com.iqapps.iq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194412668551-3qmdvn8qc6483jkhdbfjkd2pkl05emde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUsN55lnI1oauUm1wv3SdhbDri233fIqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194412668551-3qmdvn8qc6483jkhdbfjkd2pkl05emde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
