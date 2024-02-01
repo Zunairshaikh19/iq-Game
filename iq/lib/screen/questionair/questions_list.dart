@@ -109,6 +109,7 @@ class QuestionsListScreen extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: TextField(
+                            style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(

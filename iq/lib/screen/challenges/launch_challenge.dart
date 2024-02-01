@@ -18,7 +18,7 @@ class LaunchChallengeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         leading: const BackButton(color: Colors.white),
       ),
@@ -117,7 +117,10 @@ class LaunchChallengeScreen extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: TextField(
+                            style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              focusColor: Colors.white,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color:
