@@ -20,7 +20,7 @@ class SubmitChallenge extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Headline('Submit Your Own').marginOnly(bottom: 5),
+              const Headline('Create your own').marginOnly(bottom: 5),
               const BodyText(
                 'You can submit your challenge here and as long as the administration goes through your questions. They will add it into the database',
                 color: AppColors.textSecondary,
@@ -73,7 +73,6 @@ class SubmitChallenge extends StatelessWidget {
                       onChanged: (val) {},
                     ),
                   ),
-
                 ],
               ),
               SizedBox(height: height * 0.07),

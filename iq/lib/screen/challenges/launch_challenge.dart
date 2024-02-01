@@ -91,46 +91,56 @@ class LaunchChallengeScreen extends StatelessWidget {
                 challenge.questions!.length,
                 (index) {
                   final question = challenge.questions![index];
-                  return Row(
-                    children: [
-                      BodyText(
-                        '${index + 1}.',
-                        color: Colors.white,
-                        fontsize: 17,
-                      ).marginOnly(right: 10),
-                      Expanded(
-                        child: BodyText(
-                          ('${question.question ?? ''}${question.question!.endsWith('?') ? '' : '?'}')
-                              .capitalize!,
-                          fontsize: 20,
+                  return ExpansionTile(
+                    trailing: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    title: Row(
+                      children: [
+                        BodyText(
+                          '${index + 1}.',
                           color: Colors.white,
+                          fontsize: 17,
+                        ).marginOnly(right: 10),
+                        Expanded(
+                          child: BodyText(
+                            ('${question.question ?? ''}${question.question!.endsWith('?') ? '' : '?'}')
+                                .capitalize!,
+                            fontsize: 20,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
+                      ],
+                    ).marginOnly(bottom: 10),
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // set the border color here
+                                  width: 2.0, // set the border width here
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.all(12.0),
+                              hintText: 'Enter Answer',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // set the border color here
+                                  width: 2.0, // set the border width here
+                                ),
+                              ),
+                            ),
+                          )),
                     ],
-                  ).marginOnly(bottom: 10);
+                  );
                 },
               ),
             ),
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white, // set the border color here
-                        width: 2.0, // set the border width here
-                      ),
-                    ),
-                    contentPadding: EdgeInsets.all(12.0),
-                    hintText: 'Enter text',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white, // set the border color here
-                        width: 2.0, // set the border width here
-                      ),
-                    ),
-                  ),
-                )),
           ],
         ),
       ),

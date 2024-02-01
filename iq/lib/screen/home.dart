@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       floatingActionButton: IconButton(
         iconSize: 70,
@@ -60,7 +61,7 @@ class HomeScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         controller: Get.find<DashboardController>().controller,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        itemBuilder: (context, index) => homeWidgets(index, width),
+        itemBuilder: (context, index) => homeWidgets(index, width, context),
         // children: [
         //   sampleList(),
         //   gameList(width),
@@ -98,10 +99,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget homeWidgets(int value, double width) {
+  Widget homeWidgets(int value, double width, BuildContext context) {
     switch (value) {
       case 0:
-        return sampleList();
+        return sampleList(context);
       case 1:
         return const GamesList();
       case 2:
@@ -113,115 +114,239 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  sampleList() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  sampleList(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth < 600) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: InkWell(
-                onTap: () => Get.to(
-                  () => GameLandingPage(
-                    game: Get.find<AppServices>().games,
-                    color: Color(Get.find<AppServices>().games.color!),
-                  ),
-                ),
-                child: Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Headline(
-                          Get.find<AppServices>().games.search!.first,
-                          fontsize: 50,
-                          align: TextAlign.center,
-                          font: AppStrings.colaberate,
-                          color: Color(Get.find<AppServices>().games.color!),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => GameLandingPage(
+                        game: Get.find<AppServices>().games,
+                        color: Color(Get.find<AppServices>().games.color!),
+                      ),
+                    ),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Headline(
+                              Get.find<AppServices>().games.search!.first,
+                              fontsize: 50,
+                              align: TextAlign.center,
+                              font: AppStrings.colaberate,
+                              color:
+                                  Color(Get.find<AppServices>().games.color!),
+                            ),
+                            BodyText(
+                              (Get.find<AppServices>().games.name ?? '')
+                                  .capitalize!,
+                              align: TextAlign.center,
+                              color:
+                                  Color(Get.find<AppServices>().games.color!),
+                            ),
+                          ],
                         ),
-                        BodyText(
-                          (Get.find<AppServices>().games.name ?? '')
-                              .capitalize!,
-                          align: TextAlign.center,
-                          color: Color(Get.find<AppServices>().games.color!),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: InkWell(
-                onTap: () => Get.to(
-                  () => QuestionairDetails(
-                    questionair: Get.find<AppServices>().questionair,
-                  ),
-                ),
-                child: Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Headline(
-                          Get.find<AppServices>()
-                              .questionair
-                              .name![0]
-                              .toUpperCase(),
-                          fontsize: 50,
-                          align: TextAlign.center,
-                          font: AppStrings.colaberate,
-                          color:
-                              Color(Get.find<AppServices>().questionair.color!),
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => QuestionairDetails(
+                        questionair: Get.find<AppServices>().questionair,
+                      ),
+                    ),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Headline(
+                              Get.find<AppServices>()
+                                  .questionair
+                                  .name![0]
+                                  .toUpperCase(),
+                              fontsize: 50,
+                              align: TextAlign.center,
+                              font: AppStrings.colaberate,
+                              color: Color(
+                                  Get.find<AppServices>().questionair.color!),
+                            ),
+                            BodyText(
+                              (Get.find<AppServices>().questionair.name ?? '')
+                                  .capitalize!,
+                              align: TextAlign.center,
+                              color: Color(
+                                  Get.find<AppServices>().questionair.color!),
+                            ),
+                          ],
                         ),
-                        BodyText(
-                          (Get.find<AppServices>().questionair.name ?? '')
-                              .capitalize!,
-                          align: TextAlign.center,
-                          color:
-                              Color(Get.find<AppServices>().questionair.color!),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: InkWell(
-                onTap: () => Get.to(() => const SubmitScreen()),
-                child: Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.question_answer_outlined,
-                          size: 50,
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(() => const SubmitScreen()),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: const [
+                            Icon(
+                              Icons.question_answer_outlined,
+                              size: 50,
+                            ),
+                            BodyText(
+                              'Create your own',
+                              align: TextAlign.center,
+                              // font: AppStrings.colaberate,
+                            )
+                          ],
                         ),
-                        BodyText(
-                          'Submit your own',
-                          align: TextAlign.center,
-                          // font: AppStrings.colaberate,
-                        )
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+              ],
+            ).marginOnly(bottom: 20),
+            const Divider(thickness: 5).marginOnly(bottom: 10),
           ],
-        ).marginOnly(bottom: 20),
-        const Divider(thickness: 5).marginOnly(bottom: 10),
-      ],
-    );
+        );
+      } else {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => GameLandingPage(
+                        game: Get.find<AppServices>().games,
+                        color: Color(Get.find<AppServices>().games.color!),
+                      ),
+                    ),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Headline(
+                              Get.find<AppServices>().games.search!.first,
+                              fontsize: 50,
+                              align: TextAlign.center,
+                              font: AppStrings.colaberate,
+                              color:
+                                  Color(Get.find<AppServices>().games.color!),
+                            ),
+                            BodyText(
+                              (Get.find<AppServices>().games.name ?? '')
+                                  .capitalize!,
+                              align: TextAlign.center,
+                              color:
+                                  Color(Get.find<AppServices>().games.color!),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(
+                      () => QuestionairDetails(
+                        questionair: Get.find<AppServices>().questionair,
+                      ),
+                    ),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Headline(
+                              Get.find<AppServices>()
+                                  .questionair
+                                  .name![0]
+                                  .toUpperCase(),
+                              fontsize: 50,
+                              align: TextAlign.center,
+                              font: AppStrings.colaberate,
+                              color: Color(
+                                  Get.find<AppServices>().questionair.color!),
+                            ),
+                            BodyText(
+                              (Get.find<AppServices>().questionair.name ?? '')
+                                  .capitalize!,
+                              align: TextAlign.center,
+                              color: Color(
+                                  Get.find<AppServices>().questionair.color!),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () => Get.to(() => const SubmitScreen()),
+                    child: Card(
+                      elevation: 5.0,
+                      margin: const EdgeInsets.only(right: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: const [
+                            Icon(
+                              Icons.question_answer_outlined,
+                              size: 50,
+                            ),
+                            BodyText(
+                              'Create your own',
+                              align: TextAlign.center,
+                              // font: AppStrings.colaberate,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      }
+    });
   }
 }
 
@@ -342,6 +467,9 @@ class GamesList extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 20,
+            ),
             const Headline('Get all access for \$2.99').marginOnly(bottom: 10),
             GridView.count(
               shrinkWrap: true,

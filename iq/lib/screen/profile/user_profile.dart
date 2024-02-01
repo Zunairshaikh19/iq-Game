@@ -115,6 +115,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   (Get.find<UserServices>().user.name ?? '').capitalize!,
                 ),
               ),
+              Center(
+                child: Text(
+                  (Get.find<UserServices>().user.email ?? '').capitalize!,
+                ),
+              ),
               // Headline('History').marginOnly(bottom: 10, top: 20),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0, top: 20),
@@ -141,21 +146,24 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             height: height * 0.4,
                             onCompleteText: 'No games played yet..',
                           )
-                        : GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 0.76,
-                            children: List.generate(
-                              gameList.length,
-                              (index) {
-                                final Games game = gameList[index];
-                                game.players = [];
-                                return GameTile(game: game, ontap: () {});
-                              },
-                            ),
-                          ),
+                        : LayoutBuilder(builder: (context, constraints) {
+                            final crossAxisCount = constraints.maxWidth ~/ 180;
+                            return GridView.count(
+                              shrinkWrap: true,
+                              crossAxisCount: crossAxisCount,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.76,
+                              children: List.generate(
+                                gameList.length,
+                                (index) {
+                                  final Games game = gameList[index];
+                                  game.players = [];
+                                  return GameTile(game: game, ontap: () {});
+                                },
+                              ),
+                            );
+                          }),
                   ],
                 )
               else if (selected.value == 1)
@@ -168,23 +176,26 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             onCompleteText:
                                 'No challenges has been played yet..',
                           )
-                        : GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 0.76,
-                            children: List.generate(
-                              challengeList.length,
-                              (index) {
-                                final game = challengeList[index];
-                                return ChallengeTile(
-                                  challenge: game,
-                                  onTap: () {},
-                                );
-                              },
-                            ),
-                          ),
+                        : LayoutBuilder(builder: (context, constraints) {
+                            final crossAxisCount = constraints.maxWidth ~/ 180;
+                            return GridView.count(
+                              shrinkWrap: true,
+                              crossAxisCount: crossAxisCount,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.76,
+                              children: List.generate(
+                                challengeList.length,
+                                (index) {
+                                  final game = challengeList[index];
+                                  return ChallengeTile(
+                                    challenge: game,
+                                    onTap: () {},
+                                  );
+                                },
+                              ),
+                            );
+                          }),
                   ],
                 )
               else if (selected.value == 2)
@@ -196,23 +207,26 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             height: height * 0.4,
                             onCompleteText: 'No questionairs has played yet..',
                           )
-                        : GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 0.76,
-                            children: List.generate(
-                              questionairList.length,
-                              (index) {
-                                final game = questionairList[index];
-                                return QuestionairTile(
-                                  questionair: game,
-                                  onTap: () {},
-                                );
-                              },
-                            ),
-                          ),
+                        : LayoutBuilder(builder: (context, constraints) {
+                            final crossAxisCount = constraints.maxWidth ~/ 180;
+                            return GridView.count(
+                              shrinkWrap: true,
+                              crossAxisCount: crossAxisCount,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.76,
+                              children: List.generate(
+                                questionairList.length,
+                                (index) {
+                                  final game = questionairList[index];
+                                  return QuestionairTile(
+                                    questionair: game,
+                                    onTap: () {},
+                                  );
+                                },
+                              ),
+                            );
+                          }),
                   ],
                 ),
             ],

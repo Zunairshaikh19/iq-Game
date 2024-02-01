@@ -237,7 +237,7 @@ class _SubmitScreenState extends State<SubmitScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Headline('Submit Your Own').marginOnly(bottom: 5),
+                const Headline('Create your own').marginOnly(bottom: 5),
                 const BodyText(
                   'You can submit your questions or challenges here and as long as the administration goes through your questions. They will add it into the database',
                   color: AppColors.textSecondary,
@@ -247,13 +247,13 @@ class _SubmitScreenState extends State<SubmitScreen> {
                   value: 0,
                   groupValue: type.value,
                   onChanged: (value) => setType(value!),
-                  title: const BodyText('Submit your own question'),
+                  title: const BodyText('Create your own question'),
                 ),
                 RadioListTile(
                   value: 1,
                   groupValue: type.value,
                   onChanged: (value) => setType(value!),
-                  title: const BodyText('Submit your own questionair'),
+                  title: const BodyText('Create your own questionair'),
                 ),
                 RadioListTile(
                   value: 2,

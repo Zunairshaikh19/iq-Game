@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iq/services/user_services.dart';
 
+import '../../constants/constants.dart';
 import '../../global/refs.dart';
 import '../../model/questionair.dart';
 import '../../widgets/custom_buttons.dart';
@@ -30,6 +31,14 @@ class QuestionsListScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            CustomElevatedButton(
+              text: 'SAVE YOUR ANSWER'.toUpperCase(),
+              primary: AppColors.primary1,
+              onPressed: () async {},
+            ),
+            SizedBox(
+              height: 20,
+            ),
             CustomElevatedButton(
               text: 'Complete'.toUpperCase(),
               onPressed: () async {
@@ -71,24 +80,56 @@ class QuestionsListScreen extends StatelessWidget {
                 questionair.questions!.length,
                 (index) {
                   final question = questionair.questions![index];
-                  return Row(
-                    children: [
-                      BodyText(
-                        '${index + 1}.',
-                        color: Colors.white,
-                        fontsize: 17,
-                      ).marginOnly(right: 10),
-                      Expanded(
-                        child: BodyText(
-                          ((question.question ?? '') +
-                                  (question.question!.endsWith('?') ? '' : '?'))
-                              .capitalize!,
+                  return ExpansionTile(
+                    trailing: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    title: Row(
+                      children: [
+                        BodyText(
+                          '${index + 1}.',
                           color: Colors.white,
-                          fontsize: 20,
+                          fontsize: 17,
+                        ).marginOnly(right: 10),
+                        Expanded(
+                          child: BodyText(
+                            ((question.question ?? '') +
+                                    (question.question!.endsWith('?')
+                                        ? ''
+                                        : '?'))
+                                .capitalize!,
+                            color: Colors.white,
+                            fontsize: 20,
+                          ),
                         ),
-                      ),
+                      ],
+                    ).marginOnly(bottom: 10),
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // set the border color here
+                                  width: 2.0, // set the border width here
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.all(12.0),
+                              hintText: 'Enter Answer',
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      Colors.white, // set the border color here
+                                  width: 2.0, // set the border width here
+                                ),
+                              ),
+                            ),
+                          )),
                     ],
-                  ).marginOnly(bottom: 10);
+                  );
                 },
               ),
             ),

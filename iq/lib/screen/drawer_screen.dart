@@ -102,7 +102,7 @@ class DrawerScreen extends StatelessWidget {
           //   ontap: () => {Get.back(), Get.off(() => const ExtraScreen())},
           // ),
           drawerTile(
-            title: 'Submit Your Own',
+            title: 'Create your own',
             icon: const Icon(Icons.question_answer_outlined),
             ontap: () {
               Get.back();
