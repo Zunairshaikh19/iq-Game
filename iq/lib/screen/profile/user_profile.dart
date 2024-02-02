@@ -21,9 +21,9 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   List<AppModel> tabs = <AppModel>[
-    AppModel('Challneges', 1),
+    AppModel('Challenges', 1),
     AppModel('Games', 0),
-    AppModel('Questionair', 2),
+    AppModel('Questions', 2),
   ];
 
   RxList<Games> gameList = <Games>[].obs;
@@ -106,9 +106,25 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: profileIcon(Get.find<UserServices>().user.profile ?? ''),
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 199, 199, 199).withOpacity(0.8),
+                      const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5)
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Center(
+                  child:
+                      profileIcon(Get.find<UserServices>().user.profile ?? ''),
+                ),
               ),
+
               const SizedBox(height: 15),
               Center(
                 child: Headline(

@@ -224,7 +224,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ).marginOnly(bottom: 20),
-            const Divider(thickness: 5).marginOnly(bottom: 10),
+            // const Divider(thickness: 5).marginOnly(bottom: 10),
           ],
         );
       } else {
