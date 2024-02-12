@@ -34,6 +34,7 @@ class _GameLandingPageState extends State<GameLandingPage> {
   addPlayers(int value) {
     setState(() {
       playerLength = value;
+      players.clear();
       for (int i = 0; i < playerLength; i++) {
         players.add(Players(name: '', age: 0));
       }
@@ -121,7 +122,11 @@ class _GameLandingPageState extends State<GameLandingPage> {
                   trailing: DropdownButton<int>(
                     value: playerLength,
                     alignment: Alignment.center,
-                    onChanged: (val) => addPlayers(val!),
+                    onChanged: (val) {
+                      if (val != null) {
+                        addPlayers(val);
+                      }
+                    },
                     items: <int>[1, 2, 3, 4]
                         .map(
                           (e) => DropdownMenuItem(

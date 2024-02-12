@@ -137,12 +137,6 @@ class _PlayScreenState extends State<PlayScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          CustomTextButton(
-            title: 'Exit Game',
-            weight: FontWeight.bold,
-            fontsize: 20,
-            onpressed: () => Get.offAll(() => const HomeScreen()),
-          ),
           if (question.type == 1)
             SizedBox(
               width: width * 0.3,
@@ -180,6 +174,7 @@ class _PlayScreenState extends State<PlayScreen> {
       appBar: AppBar(
         centerTitle: true,
         // automaticallyImplyLeading: false,
+        toolbarHeight: 35,
         leading: InkWell(
           onTap: () async => Share.share(
             'What an interesting question("${question.question}"), I found at Inquisitive Questions.\n${await generateDynamicLinks('appid')!}',
@@ -195,6 +190,12 @@ class _PlayScreenState extends State<PlayScreen> {
           weight: FontWeight.normal,
         ),
         actions: [
+          CustomTextButton(
+            title: 'Exit Game',
+            weight: FontWeight.bold,
+            fontsize: 20,
+            onpressed: () => Get.offAll(() => const HomeScreen()),
+          ),
           Tooltip(
             message: 'Add to Favorite',
             child: InkWell(

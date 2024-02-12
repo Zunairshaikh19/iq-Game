@@ -47,9 +47,10 @@ class HomeScreen extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Get.find<UserServices>().anonymous
+                child: (Get.find<UserServices>().user?.anonymous ?? true)
                     ? assetImage(AppIcons.icon, color: Colors.black)
-                    : profileIcon(Get.find<UserServices>().user.profile!, 25),
+                    : profileIcon(
+                        Get.find<UserServices>().user?.profile ?? '', 25),
               ),
             ),
           ),

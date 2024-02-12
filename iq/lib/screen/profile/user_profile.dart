@@ -136,6 +136,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   (Get.find<UserServices>().user.email ?? '').capitalize!,
                 ),
               ),
+              Center(
+                child: BioBox(
+                  initialBio: Get.find<UserServices>().userbio,
+                ),
+              ),
               // Headline('History').marginOnly(bottom: 10, top: 20),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0, top: 20),
@@ -250,5 +255,88 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         ),
       );
     });
+  }
+}
+
+class BioBox extends StatefulWidget {
+  final String? initialBio;
+
+  const BioBox({Key? key, this.initialBio}) : super(key: key);
+
+  @override
+  _BioBoxState createState() => _BioBoxState();
+}
+
+class _BioBoxState extends State<BioBox> {
+  bool isEditing = false;
+  late String bioText;
+
+  @override
+  void initState() {
+    super.initState();
+    bioText = widget.initialBio ?? 'empty';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ExpansionTile(
+            title: Text('Bio'),
+            initiallyExpanded: false,
+            children: [
+              ListTile(
+                title: Text(bioText),
+                trailing: isEditing
+                    ? IconButton(
+                        icon: Icon(Icons.check),
+                        onPressed: () async {
+                          // Save changes and exit editing mode
+                          setState(() {
+                            isEditing = false;
+                          });
+
+                          // Update bio in Firebase
+                          updateUserBio(bioText);
+                        },
+                      )
+                    : IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          // Enter editing mode
+                          setState(() {
+                            isEditing = true;
+                          });
+                        },
+                      ),
+              ),
+              if (isEditing)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    initialValue: bioText,
+                    maxLines: null,
+                    onChanged: (value) {
+                      // Update bioText when editing
+                      setState(() {
+                        bioText = value;
+                      });
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method to update the user's bio
+  void updateUserBio(String newBio) {
+    final userServices = Get.find<UserServices>();
+    userServices.updateUserBio(newBio);
   }
 }

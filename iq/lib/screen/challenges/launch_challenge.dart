@@ -47,7 +47,7 @@ class LaunchChallengeScreen extends StatelessWidget {
               height: 20,
             ),
             CustomElevatedButton(
-              text: 'Complete'.toUpperCase(),
+              text: 'Be Known'.toUpperCase(),
               primary: challenge.color == 0
                   ? AppColors.primary1
                   : Color(challenge.color!),

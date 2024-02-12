@@ -40,7 +40,7 @@ class QuestionsListScreen extends StatelessWidget {
               height: 20,
             ),
             CustomElevatedButton(
-              text: 'Complete'.toUpperCase(),
+              text: 'Be Known'.toUpperCase(),
               onPressed: () async {
                 await playQuestionair(userid)
                     .doc(questionair.id)
