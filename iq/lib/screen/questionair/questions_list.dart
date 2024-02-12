@@ -70,8 +70,15 @@ class QuestionsListScreen extends StatelessWidget {
           children: [
             Center(
               child: const Headline(
-                'Questions',
+                'Challenge',
                 fontsize: 30,
+                color: Colors.white,
+              ).marginOnly(bottom: 20),
+            ),
+            Center(
+              child: const Headline(
+                'instructions',
+                fontsize: 20,
                 color: Colors.white,
               ).marginOnly(bottom: 20),
             ),
